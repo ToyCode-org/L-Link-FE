@@ -1,12 +1,24 @@
 {
-  "name": "fe",
+  "name": "loa-link",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "husky install",
+    "format": "prettier --write ."
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "pages/**/*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "@types/node": "20.5.7",
@@ -14,9 +26,22 @@
     "@types/react-dom": "18.2.7",
     "eslint": "8.48.0",
     "eslint-config-next": "13.4.19",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "husky": "^8.0.3",
     "next": "13.4.19",
+    "prettier": "^3.0.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "typescript": "5.2.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "eslint . --fix && prettier --write",
+      "pre-push": "eslint . --fix && prettier --write"
+    }
+  },
+  "devDependencies": {
+    "lint-staged": "^14.0.1"
   }
 }
