@@ -3,6 +3,8 @@ export default function Home() {
     <div>
       <p>home test</p>
       <p>rebase test</p>
+      <p>rebase test</p>
+      <p>rebase test</p>
     </div>
   );
 }
