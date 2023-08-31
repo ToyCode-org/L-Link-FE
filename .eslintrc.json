@@ -12,6 +12,7 @@
     "eqeqeq": "error", // 일치 연산자 사용 필수
     "react-hooks/rules-of-hooks": "error",
     "@typescript-eslint/no-redeclare": 0,
-    "no-warning-comments": "error"
+    "no-warning-comments": "error",
+    "no-alert": "error"
   }
 }

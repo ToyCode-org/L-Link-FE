@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export default function Home() {
   return (
-    <main className={stylesqvdwv.main}>
+    <main className={stylesqvdwqvwvqwv.main}>
       <div className={styles.description}>
         <p>
           Get started by editing&nbsp;
