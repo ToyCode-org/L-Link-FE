@@ -1,7 +1,6 @@
 import Image from 'next/image';
 
 export default function Home() {
-  console.log(1);
   return (
     <main className={styles.main}>
       <div className={styles.description}>
