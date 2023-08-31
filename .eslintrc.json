@@ -11,6 +11,7 @@
     "no-console": ["error", { "allow": ["warn", "error", "info"] }], // console.log() 금지
     "eqeqeq": "error", // 일치 연산자 사용 필수
     "react-hooks/rules-of-hooks": "error",
-    "@typescript-eslint/no-redeclare": 0
+    "@typescript-eslint/no-redeclare": 0,
+    "no-warning-comments": "error"
   }
 }
