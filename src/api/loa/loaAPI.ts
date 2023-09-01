@@ -27,11 +27,14 @@ LOSTARK.interceptors.request.use(config => {
 
 export const loaAPI = {
   // Character
+  // get all characters
   getCharacters: (characterName: string) =>
     LOSTARK.get(`/characters/${characterName}/siblings`),
   // Armories
+  // get characters all armories
   getArmories: (characterName: string) =>
     LOSTARK.get(`/armories/characters/${characterName}`),
+  // get A by Armories - do not use this api(reason: Rate Limit)
   getProfilesByArmories: (characterName: string) =>
     LOSTARK.get(`/armories/characters/${characterName}/profiles`),
   getEquipmentByArmories: (characterName: string) =>
