@@ -1,8 +1,8 @@
 import { loaAPI } from "@/api/loa/loaAPI";
 
 export const TestBtn = () => {
-  const characterName = "기가막힌댱";
-  const serverName = "루페온";
+  const characterName = "";
+  const serverName = "";
   const test1 = async () => {
     const data = await loaAPI.getCharacters(characterName);
     // console.log(data);
