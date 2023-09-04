@@ -1,4 +1,4 @@
-export default function Home() {
+export default function SearchCharacter() {
   return (
     <div>
       <p>dl testt</p>
