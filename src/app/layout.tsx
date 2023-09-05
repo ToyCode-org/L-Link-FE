@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -19,14 +20,21 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <Content className={inter.className}>
-        {children}
+      <LayoutBody className={inter.className}>
         <Header />
-      </Content>
+        <Content>{children}</Content>
+      </LayoutBody>
     </html>
   );
 }
 
-const Content = styled.body`
-  background-color: gray;
+const LayoutBody = styled.body`
+  color: white;
+  background-color: #0f0f0f;
+`;
+
+const Content = styled.main`
+  margin-top: 150px;
+  margin: 0 auto;
+  width: 1100px;
 `;

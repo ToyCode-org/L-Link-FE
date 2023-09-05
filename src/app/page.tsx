@@ -1,11 +1,11 @@
-'use client';
-import { TestBtn } from '@/components/test/testBtn';
+"use client";
+// import { TestBtn } from '@/components/test/testBtn';
 
 export default function Home() {
   return (
     <div>
       <p>home test</p>
-      <TestBtn />
+      {/* <TestBtn /> */}
     </div>
   );
 }
