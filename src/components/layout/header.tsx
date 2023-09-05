@@ -1,18 +1,34 @@
 import styled from "styled-components";
 import { SearchCharacter } from "./searchCharacter";
+import { useRouter } from "next/navigation";
 
 export const Header = () => {
+  const router = useRouter();
+
+  const goHome = () => {
+    router.push("/");
+  };
+  const goGuildRankings = () => {
+    router.push("/guild-rankings");
+  };
+  const goRankings = () => {
+    router.push("/rankings");
+  };
+  const goStatistics = () => {
+    router.push("/statistics");
+  };
+
   return (
     <HeaderWrap>
       <HeaderTop>
-        <Title>LoaLink</Title>
+        <Title onClick={goHome}>LoaLink</Title>
         <SearchCharacter />
       </HeaderTop>
       <HeaderNav>
-        <li>홈</li>
-        <li>길드</li>
-        <li>순위</li>
-        <li>통계</li>
+        <li onClick={goHome}>홈</li>
+        <li onClick={goGuildRankings}>길드</li>
+        <li onClick={goRankings}>순위</li>
+        <li onClick={goStatistics}>통계</li>
       </HeaderNav>
     </HeaderWrap>
   );

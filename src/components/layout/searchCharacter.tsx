@@ -1,10 +1,10 @@
-"use client";
 import styled from "styled-components";
 import { SearchIcon } from "../common/icons";
 import { FormEvent } from "@/types";
-import { goSearchCharacter } from "@/router/router";
+import { useRouter } from "next/navigation";
 
 export const SearchCharacter = () => {
+  const router = useRouter();
   const onSubmitHandler = (e: FormEvent) => {
     e.preventDefault();
     const element = document.getElementById(
@@ -12,7 +12,7 @@ export const SearchCharacter = () => {
     ) as HTMLInputElement;
     const name = element.value;
     element.value = "";
-    goSearchCharacter(name);
+    router.push(`/search-character?${name}`);
   };
 
   return (
