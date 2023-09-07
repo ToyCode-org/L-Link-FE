@@ -12,7 +12,7 @@ export const SearchCharacter = () => {
     ) as HTMLInputElement;
     const name = element.value;
     element.value = "";
-    router.push(`/search-character?${name}`);
+    router.push(`/search-character?character-name=${name}`);
   };
 
   return (

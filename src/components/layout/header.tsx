@@ -1,21 +1,13 @@
 import styled from "styled-components";
 import { SearchCharacter } from "./searchCharacter";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export const Header = () => {
   const router = useRouter();
 
   const goHome = () => {
     router.push("/");
-  };
-  const goGuildRankings = () => {
-    router.push("/guild-rankings");
-  };
-  const goRankings = () => {
-    router.push("/rankings");
-  };
-  const goStatistics = () => {
-    router.push("/statistics");
   };
 
   return (
@@ -25,10 +17,11 @@ export const Header = () => {
         <SearchCharacter />
       </HeaderTop>
       <HeaderNav>
-        <li onClick={goHome}>홈</li>
-        <li onClick={goGuildRankings}>길드</li>
-        <li onClick={goRankings}>순위</li>
-        <li onClick={goStatistics}>통계</li>
+        <Link href="/">홈</Link>
+        <Link href="/guild-rankings">길드</Link>
+        <Link href="/rankings">순위</Link>
+        <Link href="/statistics">통계</Link>
+        <Link href="/stone-shave">세공</Link>
       </HeaderNav>
     </HeaderWrap>
   );
@@ -66,13 +59,14 @@ const HeaderNav = styled.nav`
   border-top: 1px solid #7b7b7b;
   border-bottom: 1px solid #7b7b7b;
   background-color: #1b1b1b;
-  & li {
+  & a {
     display: flex;
     justify-content: center;
     align-items: center;
     list-style: none;
     width: 120px;
     height: 40px;
+    font-weight: bold;
     cursor: pointer;
     &:hover {
       background-color: #2e2e2e;

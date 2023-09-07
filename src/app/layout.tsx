@@ -31,10 +31,20 @@ export default function RootLayout({
 const LayoutBody = styled.body`
   color: white;
   background-color: #0f0f0f;
+
+  & a {
+    text-decoration: none;
+    &:link {
+      color: white;
+    }
+    &:visited {
+      color: white;
+    }
+  }
 `;
 
 const Content = styled.main`
-  margin-top: 150px;
   margin: 0 auto;
+  margin-top: 120px;
   width: 1100px;
 `;
