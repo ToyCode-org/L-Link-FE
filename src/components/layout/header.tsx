@@ -33,7 +33,6 @@ const HeaderWrap = styled.header`
   left: 0;
   width: 100%;
   background-color: #0f0f0f;
-
   z-index: 1;
 `;
 

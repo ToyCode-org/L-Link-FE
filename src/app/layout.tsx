@@ -41,6 +41,12 @@ const LayoutBody = styled.body`
       color: white;
     }
   }
+  & ul,
+  li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
 `;
 
 const Content = styled.main`
