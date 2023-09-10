@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Character } from "@/types";
+import { commonStyles } from "../common/component-style";
 
 interface Props {
   characters: Character[];
@@ -31,32 +32,36 @@ export const AllCharacters = ({ characters }: Props) => {
       {objectKeys.map((server, index) => {
         return (
           <React.Fragment key={index}>
-            <p>{server}</p>
-            {characterNameByServer[server].map((subCharacters, index) => {
-              const {
-                ServerName,
-                ItemAvgLevel,
-                CharacterName,
-                CharacterLevel,
-                CharacterClassName,
-              } = subCharacters;
-              return (
-                <li key={index}>
-                  <div>
-                    <div>직업이미지</div>
-                    <div>
-                      <div>{ServerName}</div>
-                      <div>{CharacterClassName}</div>
-                    </div>
-                    <div>
-                      <div>{CharacterLevel}</div>
-                      <div>{ItemAvgLevel}</div>
-                    </div>
-                  </div>
-                  <div>{CharacterName}</div>
-                </li>
-              );
-            })}
+            <ServerNameTag>{server}</ServerNameTag>
+            <GridBox>
+              {characterNameByServer[server].map((subCharacters, index) => {
+                const {
+                  ServerName,
+                  ItemAvgLevel,
+                  CharacterName,
+                  CharacterLevel,
+                  CharacterClassName,
+                } = subCharacters;
+                return (
+                  <CharacterCard key={index} style={commonStyles.innerContent}>
+                    <CardInnerFlex>
+                      <div>직업이미지</div>
+                      <div>
+                        <CardInfo>
+                          <div>{ServerName}</div>
+                          <div>{CharacterClassName}</div>
+                        </CardInfo>
+                        <CardInfo>
+                          <div>{CharacterLevel}</div>
+                          <div>{ItemAvgLevel}</div>
+                        </CardInfo>
+                      </div>
+                    </CardInnerFlex>
+                    <div>{CharacterName}</div>
+                  </CharacterCard>
+                );
+              })}
+            </GridBox>
           </React.Fragment>
         );
       })}
@@ -65,3 +70,32 @@ export const AllCharacters = ({ characters }: Props) => {
 };
 
 const Container = styled.div``;
+
+const GridBox = styled.ul`
+  display: grid;
+  justify-content: space-between;
+  grid-template-columns: 330px 330px;
+  grid-row-gap: 30px;
+`;
+
+const ServerNameTag = styled.p`
+  padding: 5px;
+  border: 1px solid #7b7b7b;
+  border-radius: 5px;
+  background-color: black;
+  font-weight: bold;
+`;
+
+const CharacterCard = styled.li`
+  display: flex;
+  flex-direction: column;
+`;
+
+const CardInnerFlex = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const CardInfo = styled.div`
+  display: flex;
+`;
