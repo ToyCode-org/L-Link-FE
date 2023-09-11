@@ -3,7 +3,7 @@ import axios from "axios";
 // api -----
 // https://developer-lostark.game.onstove.com/usage-guide#API-AUCTIONS
 //
-// ### API Errors
+// ### API status
 // 200 - OK
 // 401 - Unauthorized
 // 403 - Forbidden
