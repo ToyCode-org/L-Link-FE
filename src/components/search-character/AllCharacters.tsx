@@ -2,6 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { Character } from "@/types";
 import { commonStyles } from "../common/component-style";
+import { getPublicImage } from "@/util/getPubliceImage";
+import Image from "next/image";
+import Link from "next/link";
 
 interface Props {
   characters: Character[];
@@ -43,21 +46,30 @@ export const AllCharacters = ({ characters }: Props) => {
                   CharacterClassName,
                 } = subCharacters;
                 return (
-                  <CharacterCard key={index} style={commonStyles.innerContent}>
+                  <CharacterCard
+                    key={index}
+                    style={commonStyles.innerContent}
+                    href={`search-character?character-name=${CharacterName}`}
+                  >
                     <CardInnerFlex>
-                      <div>직업이미지</div>
-                      <div>
-                        <CardInfo>
-                          <div>{ServerName}</div>
-                          <div>{CharacterClassName}</div>
-                        </CardInfo>
-                        <CardInfo>
-                          <div>{CharacterLevel}</div>
-                          <div>{ItemAvgLevel}</div>
-                        </CardInfo>
-                      </div>
+                      <Image
+                        src={getPublicImage(`class/${CharacterClassName}`)}
+                        width={50}
+                        height={50}
+                        alt="직업이미지"
+                      />
+                      <CardInfo>
+                        <InfoBody>
+                          {ServerName}
+                          <span>{CharacterClassName}</span>
+                        </InfoBody>
+                        <InfoBody>
+                          Lv.{CharacterLevel}
+                          <span>{ItemAvgLevel}</span>
+                        </InfoBody>
+                      </CardInfo>
                     </CardInnerFlex>
-                    <div>{CharacterName}</div>
+                    <CardFooter>{CharacterName}</CardFooter>
                   </CharacterCard>
                 );
               })}
@@ -86,16 +98,38 @@ const ServerNameTag = styled.p`
   font-weight: bold;
 `;
 
-const CharacterCard = styled.li`
+const CharacterCard = styled(Link)`
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 `;
 
 const CardInnerFlex = styled.div`
+  padding: 10px;
   display: flex;
   align-items: center;
+
+  & img {
+    border-radius: 25px;
+  }
 `;
 
 const CardInfo = styled.div`
   display: flex;
+  flex-direction: column;
+  font-weight: bold;
+`;
+
+const InfoBody = styled.div`
+  margin-left: 15px;
+
+  & span {
+    margin-left: 10px;
+  }
+`;
+
+const CardFooter = styled.span`
+  padding-bottom: 10px;
+  margin-left: 10px;
+  font-weight: 400;
 `;
