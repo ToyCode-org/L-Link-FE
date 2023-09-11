@@ -60,11 +60,11 @@ export const AllCharacters = ({ characters }: Props) => {
                       />
                       <CardInfo>
                         <InfoBody>
-                          {ServerName}
+                          <GuildName>{ServerName}</GuildName>
                           <span>{CharacterClassName}</span>
                         </InfoBody>
                         <InfoBody>
-                          Lv.{CharacterLevel}
+                          <CombatLvl>Lv.{CharacterLevel}</CombatLvl>
                           <span>{ItemAvgLevel}</span>
                         </InfoBody>
                       </CardInfo>
@@ -124,12 +124,18 @@ const InfoBody = styled.div`
   margin-left: 15px;
 
   & span {
-    margin-left: 10px;
+    margin-right: 10px;
   }
 `;
+
+const GuildName = styled.span`
+  color: skyblue;
+`;
+
+const CombatLvl = styled.span``;
 
 const CardFooter = styled.span`
   padding-bottom: 10px;
   margin-left: 10px;
-  font-weight: 400;
+  font-weight: bold;
 `;
