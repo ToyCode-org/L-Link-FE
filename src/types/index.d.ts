@@ -60,7 +60,7 @@ export type Equipment = {
   Icon: string;
   Name: string;
   Tooltip: string;
-  type: string;
+  Type: string;
 };
 export type ArmoryEquipment = Equipment[];
 
