@@ -8,6 +8,7 @@ import {
   gradeName,
 } from "../itemInfo";
 import { Equipment } from "@/types";
+import { qualityCheck } from "../itemInfo";
 
 interface Props {
   type: string;
@@ -47,7 +48,11 @@ export const EquipmentSlot = ({ equipmentInfo }: EquipmentInfo) => {
           style={{ background: `${gradeBackground[grade]}` }}
           alt="avater"
         />
-        <QualityProgress value={qualityValue} max={100} />
+        <QualityProgress
+          value={qualityValue}
+          max={100}
+          $quality={qualityCheck(qualityValue)}
+        />
         <ProgressValue>{qualityValue}</ProgressValue>
       </div>
       <ItemName style={{ color: `${gradeColor[grade]}` }}>
@@ -80,7 +85,11 @@ export const AccessorySlot = ({ equipmentInfo }: AccessoryInfo) => {
         />
         {qualityValue >= 0 ? (
           <>
-            <QualityProgress value={qualityValue} max={100} />
+            <QualityProgress
+              value={qualityValue}
+              max={100}
+              $quality={qualityCheck(qualityValue)}
+            />
             <ProgressValue>{qualityValue}</ProgressValue>
           </>
         ) : null}
@@ -114,7 +123,7 @@ const ItemType = styled.span`
   border-radius: 10px 0 0 0;
 `;
 
-const QualityProgress = styled.progress`
+const QualityProgress = styled.progress<{ $quality: string }>`
   appearance: none;
   position: absolute;
   transform: translate(-51px, 45px);
@@ -126,6 +135,7 @@ const QualityProgress = styled.progress`
     background: black;
   }
   &::-webkit-progress-value {
+    background-color: ${props => props.$quality};
   }
 `;
 const ProgressValue = styled.div`

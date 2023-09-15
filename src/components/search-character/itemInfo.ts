@@ -38,10 +38,13 @@ export const gradeBackground = {
 // 90~99 보라
 // 100 밝은 주황
 
-// 노멀 배경: white
-// 희귀 배경: linear-gradient(135deg,#8fd82f,#498001);
-// 고급 배경: linear-gradient(135deg,#111f2c,#113d5d);
-// 영웅 배경: linear-gradient(135deg,#261331,#480d5d);
-// 전설 배경: linear-gradient(135deg,#362003,#9e5f04);
-// 유물 배경: linear-gradient(135deg,#341a09,#a24006);
-// 고대 배경: linear-gradient(135deg,#3d3325,#dcc999);
+export const qualityCheck = (qualityValue: number): string => {
+  let color = "";
+  if (qualityValue < 10) color = "red";
+  if (10 <= qualityValue && qualityValue < 30) color = "yellow";
+  if (30 <= qualityValue && qualityValue < 70) color = "green";
+  if (70 <= qualityValue && qualityValue < 90) color = "blue";
+  if (90 <= qualityValue && qualityValue < 100) color = "purple";
+  if (qualityValue === 100) color = "orange";
+  return color;
+};
