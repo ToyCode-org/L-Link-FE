@@ -142,6 +142,13 @@ const DetailInfoNav = styled.nav`
     font-weight: bold;
     cursor: pointer;
 
+    &:first-child {
+      border-radius: 10px 0 0 10px;
+    }
+    &:last-child {
+      border-radius: 0 10px 10px 0;
+    }
+
     &:hover {
       background-color: #080a0c;
     }
