@@ -11,12 +11,11 @@ import { qualityCheck } from "../itemInfo";
 
 // types
 import { Equipment } from "@/types";
-import { ToolTip, EquipmentData, IndentStringGroup } from "..";
+import { ToolTip, EngravingData, IndentStringGroup } from "..";
 
 interface Props {
   type: string;
 }
-
 export const BlankEquipment = ({ type }: Props) => {
   return (
     <EquipmentItem>
@@ -68,7 +67,6 @@ export const EquipmentSlot = ({ equipmentInfo }: EquipmentInfo) => {
 interface AccessoryInfo {
   equipmentInfo: Equipment;
 }
-
 export const AccessorySlot = ({ equipmentInfo }: AccessoryInfo) => {
   const tooltips = JSON.parse(equipmentInfo.Tooltip);
   const typeName =
@@ -77,7 +75,7 @@ export const AccessorySlot = ({ equipmentInfo }: AccessoryInfo) => {
   const qualityValue = tooltips.Element_001.value.qualityValue;
 
   let stat: string[];
-  let equipmentData: EquipmentData[] = [];
+  let engravingData: EngravingData[] = [];
 
   // TODO : tooltip[value] type err : any type 수정 필요
   const getIndentStringGroup = (tooltip: ToolTip | any) => {
@@ -90,12 +88,12 @@ export const AccessorySlot = ({ equipmentInfo }: AccessoryInfo) => {
     }
   };
 
-  const getEquipments = (contentStr: IndentStringGroup) => {
-    const equipFirst = contentStr.Element_000.contentStr;
-    const equipSecond = contentStr.Element_001.contentStr;
-    const equipThird = contentStr.Element_002.contentStr;
+  const getEngraving = (contentStr: IndentStringGroup) => {
+    const egvFirst = contentStr.Element_000.contentStr;
+    const egvSecond = contentStr.Element_001.contentStr;
+    const egvThird = contentStr.Element_002.contentStr;
 
-    let text = `${equipFirst}${equipSecond}${equipThird}`;
+    let text = `${egvFirst}${egvSecond}${egvThird}`;
     let parser = new DOMParser();
     let doc = parser.parseFromString(text, "text/html");
     // replaceAll은 호출될 때마다 regex를 컴파일하기 때문에
@@ -107,14 +105,14 @@ export const AccessorySlot = ({ equipmentInfo }: AccessoryInfo) => {
     result = result.split("[");
     result.shift();
 
-    let equipLevel = result.map(value => {
+    let engravingLevel = result.map(value => {
       const data = value.split(" 활성도+");
       return {
-        equipName: data[0],
+        engravingName: data[0],
         level: data[1],
       };
     });
-    return equipLevel;
+    return engravingLevel;
   };
 
   const indentStringGroupKey = getIndentStringGroup(tooltips) as string;
@@ -125,15 +123,15 @@ export const AccessorySlot = ({ equipmentInfo }: AccessoryInfo) => {
     }
     case "스톤": {
       stat = tooltips.Element_004.value.Element_001.split("<BR>");
-      const equipState =
+      const engravingState =
         tooltips[indentStringGroupKey].value.Element_000.contentStr;
-      equipmentData = getEquipments(equipState);
+      engravingData = getEngraving(engravingState);
       break;
     }
     default: {
       stat = tooltips.Element_005.value.Element_001.split("<BR>");
-      const equipState = tooltips.Element_006.value.Element_000.contentStr;
-      equipmentData = getEquipments(equipState);
+      const engravingState = tooltips.Element_006.value.Element_000.contentStr;
+      engravingData = getEngraving(engravingState);
       break;
     }
   }
@@ -171,11 +169,11 @@ export const AccessorySlot = ({ equipmentInfo }: AccessoryInfo) => {
         </Stats>
       </StatsWrap>
       <EngravingStats style={typeName !== "팔찌" ? {} : { display: "none" }}>
-        {equipmentData.map((value, index) => {
+        {engravingData.map((value, index) => {
           return (
             <li key={index}>
-              <span>{value.level}</span>
-              {value.equipName}
+              <EngravingLevel $index={index}>{value.level}</EngravingLevel>
+              {value.engravingName}
             </li>
           );
         })}
@@ -246,16 +244,36 @@ const Stats = styled.div`
 `;
 
 const EngravingStats = styled.div`
+  display: flex;
+  flex-direction: column;
   margin: 0 10px;
   font-size: 12px;
 
   & li {
-    & span {
-      margin-right: 5px;
-      background-color: red;
-      width: 20px;
-      height: 20px;
-      border-radius: 5px;
-    }
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    font-weight: bold;
   }
+`;
+
+const EngravingLevel = styled.span<{ $index: number }>`
+  margin-right: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 12px;
+  height: 14px;
+  border-radius: 10px;
+  font-size: 10px;
+  background-color: ${props => {
+    switch (props.$index) {
+      case 0:
+        return "blue";
+      case 1:
+        return "purple";
+      case 2:
+        return "#ff3232";
+    }
+  }};
 `;

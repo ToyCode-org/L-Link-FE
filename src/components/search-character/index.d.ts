@@ -82,8 +82,8 @@ export type ToolTip = {
   };
 };
 
-export type EquipmentData = {
-  equipName: string;
+export type EngravingData = {
+  engravingName: string;
   level: string;
 };
 
