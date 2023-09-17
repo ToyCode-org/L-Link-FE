@@ -8,6 +8,7 @@ export const gradeName = {
   "4": "전설",
   "5": "유물",
   "6": "고대",
+  "7": "에스더",
 };
 
 export const gradeColor = {
@@ -18,6 +19,7 @@ export const gradeColor = {
   "4": "#eb9313",
   "5": "#ff670c",
   "6": "#dcc999",
+  "7": "#3af3ef",
 };
 
 export const gradeBackground = {
@@ -28,6 +30,7 @@ export const gradeBackground = {
   "4": "linear-gradient(135deg,#362003,#9e5f04)",
   "5": "linear-gradient(135deg,#341a09,#a24006)",
   "6": "linear-gradient(135deg,#3d3325,#dcc999)",
+  "7": "linear-gradient(135deg,#0c2e2c,#2faba8)",
 };
 
 // 품질
@@ -37,7 +40,6 @@ export const gradeBackground = {
 // ~90 파랑
 // 90~99 보라
 // 100 밝은 주황
-
 export const qualityCheck = (qualityValue: number): string => {
   let color = "";
   if (qualityValue < 10) color = "red";
