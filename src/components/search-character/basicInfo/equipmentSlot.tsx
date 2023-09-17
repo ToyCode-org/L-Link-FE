@@ -70,6 +70,9 @@ export const AccessorySlot = ({ equipmentInfo }: AccessoryInfo) => {
   const tooltipes = JSON.parse(equipmentInfo.Tooltip);
   const grade: GradeLevel = tooltipes.Element_001.value.slotData.iconGrade;
   const qualityValue = tooltipes.Element_001.value.qualityValue;
+
+  // const stats = tooltipes.Element_005.value.Element_001;
+
   return (
     <EquipmentItem>
       <div>
@@ -99,9 +102,15 @@ export const AccessorySlot = ({ equipmentInfo }: AccessoryInfo) => {
           {gradeName[grade]}
         </ItemName>
         <Stats>
+          {/* {stats.map((stat, index) => {
+            return <li key={index}>{stat}</li>;
+          })} */}
           <li>fte</li>
         </Stats>
       </div>
+      <EngravingStats>
+        <li>fte</li>
+      </EngravingStats>
     </EquipmentItem>
   );
 };
@@ -155,4 +164,11 @@ const ItemName = styled.div`
   font-size: 12px;
 `;
 
-const Stats = styled.div``;
+const Stats = styled.div`
+  margin: 0 10px;
+  font-size: 12px;
+`;
+
+const EngravingStats = styled.div`
+  font-size: 12px;
+`;
