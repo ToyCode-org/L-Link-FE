@@ -4,6 +4,7 @@ import {
   BlankEquipment,
   EquipmentSlot,
   AccessorySlot,
+  MountedEngraving,
 } from "./basicInfo/equipmentSlot";
 
 interface Props {
@@ -14,12 +15,11 @@ export const BasicInfo = ({ characterArmories }: Props) => {
   const {
     // ArmoryAvatars,
     // ArmoryCard,
-    // ArmoryEngraving,
+    ArmoryEngraving,
     ArmoryEquipment,
     // ArmoryGem,
     // ArmoryProfile,
   } = characterArmories;
-  // console.log(characterArmories);
 
   let EQUIPMENTS: (string | Equipment)[] = [
     "투구",
@@ -41,8 +41,6 @@ export const BasicInfo = ({ characterArmories }: Props) => {
     const idx = EQUIPMENTS.indexOf(item.Type);
     if (idx !== -1) EQUIPMENTS[idx] = item;
   });
-  // console.log(ArmoryEquipment);
-  // console.log("test", EQUIPMENTS);
 
   const equipments = [
     EQUIPMENTS[0],
@@ -77,6 +75,7 @@ export const BasicInfo = ({ characterArmories }: Props) => {
               }
               return <EquipmentSlot key={index} equipmentInfo={item} />;
             })}
+            <MountedEngraving armoryEngraving={ArmoryEngraving} />
           </EquipmentList>
           <Accessory>
             {accessories.map((item, index) => {

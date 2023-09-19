@@ -81,6 +81,13 @@ export type ToolTip = {
     value: string;
   };
 };
+export type ElementType =
+  | "NameTagBox"
+  | "ItemTitle"
+  | "MultiTextBox"
+  | "ItemPartBox"
+  | "IndentStringGroup"
+  | "SingleTextBox";
 
 export type EngravingData = {
   engravingName: string;

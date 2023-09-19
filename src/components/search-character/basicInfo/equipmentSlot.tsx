@@ -10,8 +10,8 @@ import {
 import { qualityCheck } from "../itemInfo";
 
 // types
-import { Equipment } from "@/types";
-import { ToolTip, EngravingData, IndentStringGroup } from "..";
+import { Equipment, ArmoryEngraving } from "@/types";
+import { ToolTip, EngravingData, IndentStringGroup, ElementType } from "..";
 
 interface Props {
   type: string;
@@ -64,6 +64,57 @@ export const EquipmentSlot = ({ equipmentInfo }: EquipmentInfo) => {
   );
 };
 
+interface MountedEngravingData {
+  armoryEngraving: ArmoryEngraving;
+}
+export const MountedEngraving = ({ armoryEngraving }: MountedEngravingData) => {
+  const mountedEng = !armoryEngraving ? [] : armoryEngraving.Engravings;
+  const engraveData = JSON.parse(mountedEng[0].Tooltip).Element_001.value
+    .leftText;
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(engraveData, "text/html");
+  const getInnerText = doc.body.innerText.split(" ");
+  const engravePoint = getInnerText[getInnerText.length - 1];
+
+  return (
+    <EngravingWrap>
+      {mountedEng.map((eng, index) => {
+        return (
+          <li key={index}>
+            <Image src={eng.Icon} width={50} height={50} alt="각인" />
+            <EngLevelWrap>
+              <span>{eng.Name}</span>
+              <span>활성도{` ${engravePoint}`}</span>
+            </EngLevelWrap>
+          </li>
+        );
+      })}
+    </EngravingWrap>
+  );
+};
+const EngravingWrap = styled.div`
+  margin-top: 12px;
+  display: flex;
+  & li {
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    font-weight: bold;
+    & img {
+      margin-right: 10px;
+      border-radius: 50px;
+    }
+  }
+`;
+const EngLevelWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  & span:first-child {
+    color: orange;
+  }
+`;
+
 interface AccessoryInfo {
   equipmentInfo: Equipment;
 }
@@ -78,11 +129,14 @@ export const AccessorySlot = ({ equipmentInfo }: AccessoryInfo) => {
   let engravingData: EngravingData[] = [];
 
   // TODO : tooltip[value] type err : any type 수정 필요
-  const getIndentStringGroup = (tooltip: ToolTip | any) => {
+  const getElementTypeNameStringGroup = (
+    tooltip: ToolTip | any,
+    elementType: ElementType,
+  ) => {
     const keys = Object.keys(tooltip);
 
     for (const value of keys) {
-      if (tooltip[value].type === "IndentStringGroup") {
+      if (tooltip[value].type === elementType) {
         return value;
       }
     }
@@ -115,10 +169,29 @@ export const AccessorySlot = ({ equipmentInfo }: AccessoryInfo) => {
     return engravingLevel;
   };
 
-  const indentStringGroupKey = getIndentStringGroup(tooltips) as string;
+  // ## 1
+  // const getBraceletEffects = (effectInfo: string) => {
+  //   let parser = new DOMParser();
+  //   let doc = parser.parseFromString(effectInfo, "text/html");
+  //   let result = doc.body.innerText;
+  //   // TODO: data parsing
+  //   return result;
+  // };
+
+  const indentStringGroupKey = getElementTypeNameStringGroup(
+    tooltips,
+    "IndentStringGroup",
+  ) as string;
   switch (typeName) {
     case "팔찌": {
       stat = [""];
+      // ## 1
+      // const itemPartBox = getElementTypeNameStringGroup(
+      //   tooltips,
+      //   "ItemPartBox",
+      // ) as string;
+      // const statState = tooltips[itemPartBox].value.Element_001;
+      // const parsingStats = getBraceletEffects(statState);
       break;
     }
     case "스톤": {

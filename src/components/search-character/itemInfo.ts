@@ -50,3 +50,5 @@ export const qualityCheck = (qualityValue: number): string => {
   if (qualityValue === 100) color = "orange";
   return color;
 };
+
+// bracelet effects
