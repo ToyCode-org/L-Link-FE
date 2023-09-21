@@ -1,27 +1,36 @@
 import styled from "styled-components";
 import Image from "next/image";
 import { ArmoryGem } from "@/types";
+import {
+  gradeBackground,
+  gradeNumber,
+  GradeLevel,
+  GradeName,
+} from "../itemInfo";
 
 interface Props {
   gemList: ArmoryGem;
 }
 
 export const GemSlot = ({ gemList }: Props) => {
-  const { Effects, Gems } = gemList;
+  const { Gems } = gemList;
 
   return (
     <Container>
-      <p>효과</p>
-      {Effects.map((value, index) => {
-        const { Name, Description } = value;
-        return <li key={index}>{`${Name} ${Description}`}</li>;
-      })}
-      <p>보석이미지 base</p>
       {Gems.map((value, index) => {
-        const { Level, Icon } = value;
+        const { Level, Icon, Grade } = value;
+        const gradeLevel = gradeNumber[Grade as GradeName] as GradeLevel;
+        // const thisEffect = Effects[index];
+
         return (
           <li key={index}>
-            <Image src={Icon} width={50} height={50} alt="보석" />
+            <Image
+              src={Icon}
+              width={50}
+              height={50}
+              alt="보석"
+              style={{ background: `${gradeBackground[gradeLevel]}` }}
+            />
             <span>{Level}레벨</span>
           </li>
         );
@@ -30,4 +39,21 @@ export const GemSlot = ({ gemList }: Props) => {
   );
 };
 
-const Container = styled.div``;
+const Container = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  & li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & img {
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  }
+  & span {
+    font-size: 12px;
+  }
+`;

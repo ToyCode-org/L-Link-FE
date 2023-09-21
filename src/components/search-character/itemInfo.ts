@@ -1,4 +1,13 @@
-export type GradeLevel = "0" | "1" | "2" | "3" | "4" | "5" | "6";
+export type GradeLevel = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7";
+export type GradeName =
+  | "일반"
+  | "희귀"
+  | "고급"
+  | "영웅"
+  | "전설"
+  | "유물"
+  | "고대"
+  | "에스더";
 
 export const gradeName = {
   "0": "일반",
@@ -9,6 +18,17 @@ export const gradeName = {
   "5": "유물",
   "6": "고대",
   "7": "에스더",
+};
+
+export const gradeNumber = {
+  일반: "0",
+  희귀: "1",
+  고급: "2",
+  영웅: "3",
+  전설: "4",
+  유물: "5",
+  고대: "6",
+  에스더: "7",
 };
 
 export const gradeColor = {
