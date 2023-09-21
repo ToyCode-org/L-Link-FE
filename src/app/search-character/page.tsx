@@ -84,14 +84,16 @@ export default function SearchCharacter() {
                 })}
               </DetailInfoNav>
               {indexNumber === 0 ? (
-                <BasicInfo characterArmories={characterArmories} />
+                <>
+                  <BasicInfo characterArmories={characterArmories} />
+                  <GemSlot gemList={characterArmories.ArmoryGem} />
+                </>
               ) : null}
               {indexNumber === 1 ? <Skills /> : null}
               {indexNumber === 2 ? <Collections /> : null}
               {indexNumber === 3 ? (
                 <AllCharacters characters={characters} />
               ) : null}
-              <GemSlot gemList={characterArmories.ArmoryGem} />
             </DetailInfo>
           </InterfaceBox>
         </>

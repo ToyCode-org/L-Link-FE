@@ -6,6 +6,7 @@ import {
   AccessorySlot,
   MountedEngraving,
 } from "./basicInfo/equipmentSlot";
+import { ComponentLabel } from "../common/components";
 
 interface Props {
   characterArmories: CharacterArmories;
@@ -62,10 +63,7 @@ export const BasicInfo = ({ characterArmories }: Props) => {
 
   return (
     <Container>
-      <EquipmentNav>
-        <li>장비</li>
-        <li>보석</li>
-      </EquipmentNav>
+      <ComponentLabel>장비</ComponentLabel>
       <Content>
         <Equipments>
           <EquipmentList>
@@ -92,33 +90,6 @@ export const BasicInfo = ({ characterArmories }: Props) => {
 };
 
 const Container = styled.div``;
-
-const EquipmentNav = styled.nav`
-  display: flex;
-  margin-bottom: 15px;
-
-  & li {
-    width: 50px;
-    height: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #15181d;
-    font-weight: bold;
-    cursor: pointer;
-
-    &:first-child {
-      border-radius: 10px 0 0 10px;
-    }
-    &:last-child {
-      border-radius: 0 10px 10px 0;
-    }
-
-    &:hover {
-      background-color: #080a0c;
-    }
-  }
-`;
 
 const Content = styled.div``;
 

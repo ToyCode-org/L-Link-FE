@@ -1,8 +1,8 @@
 export type GradeLevel = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7";
 export type GradeName =
   | "일반"
-  | "희귀"
   | "고급"
+  | "희귀"
   | "영웅"
   | "전설"
   | "유물"
@@ -11,8 +11,8 @@ export type GradeName =
 
 export const gradeName = {
   "0": "일반",
-  "1": "희귀",
-  "2": "고급",
+  "1": "고급",
+  "2": "희귀",
   "3": "영웅",
   "4": "전설",
   "5": "유물",
@@ -22,8 +22,8 @@ export const gradeName = {
 
 export const gradeNumber = {
   일반: "0",
-  희귀: "1",
-  고급: "2",
+  고급: "1",
+  희귀: "2",
   영웅: "3",
   전설: "4",
   유물: "5",

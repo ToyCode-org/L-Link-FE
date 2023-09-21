@@ -68,6 +68,8 @@ interface MountedEngravingData {
   armoryEngraving: ArmoryEngraving;
 }
 export const MountedEngraving = ({ armoryEngraving }: MountedEngravingData) => {
+  if (!armoryEngraving) return;
+
   const mountedEng = !armoryEngraving ? [] : armoryEngraving.Engravings;
   const engraveData = JSON.parse(mountedEng[0].Tooltip).Element_001.value
     .leftText;
