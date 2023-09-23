@@ -11,28 +11,53 @@ interface Props {
 export const CardSlot = ({ cardList }: Props) => {
   if (!cardList) return;
 
-  //   console.log(cardList);
-  const cards = cardList.Cards;
-
+  const { Cards, Effects } = cardList;
   return (
     <Container>
       <ComponentLabel>카드</ComponentLabel>
       <CardBox>
-        {cards.map((data, index) => {
-          const { Icon } = data;
+        {Cards.map((data, index) => {
+          const { Name, Icon, AwakeCount, AwakeTotal } = data;
           return (
             <li key={index}>
               <Image src={Icon} width={110} height={200} alt="card" />
-              <CardAwake
-                src={getPublicImage("card/awake-card")}
-                width={110}
-                height={80}
-                alt="awake"
-              />
+              <AwakeWrap>
+                <CardAwakeSlot
+                  src={getPublicImage("card/awake-card")}
+                  width={110}
+                  height={80}
+                  alt="awake"
+                />
+                <AwakedPoint
+                  src={getPublicImage("card/awake-card")}
+                  width={110}
+                  height={80}
+                  alt="awake"
+                  style={{
+                    transform: `translate(${
+                      -110 - (AwakeTotal - AwakeCount) * 22
+                    }px, -38px)`,
+                  }}
+                />
+              </AwakeWrap>
+              <CardName>{Name}</CardName>
             </li>
           );
         })}
       </CardBox>
+      <div>
+        <p>효과</p>
+        {Effects.map((value1, idx1) =>
+          value1.Items.map((value2, idx2) => {
+            const { Name, Description } = value2;
+            return (
+              <EffectInfo key={`${idx1}${idx2}`}>
+                {Name} : <span>{Description}</span>
+              </EffectInfo>
+            );
+          }),
+        )}
+      </div>
     </Container>
   );
 };
@@ -47,6 +72,31 @@ const CardBox = styled.div`
   }
 `;
 
-const CardAwake = styled(Image)`
-  object-position: 0px 5px;
+const AwakeWrap = styled.div`
+  position: absolute;
+  transform: translate(0%, -50px);
+  height: 40px;
+  overflow: hidden;
+`;
+const CardAwakeSlot = styled(Image)`
+  object-position: 0px 3px;
+`;
+const AwakedPoint = styled(Image)`
+  position: absolute;
+  z-index: 1;
+`;
+const CardName = styled.div`
+  font-size: 10px;
+  font-weight: bold;
+  text-align: center;
+`;
+
+const EffectInfo = styled.li`
+  font-size: 14px;
+  font-weight: bold;
+
+  & span {
+    font-size: 14px;
+    font-weight: normal;
+  }
 `;
