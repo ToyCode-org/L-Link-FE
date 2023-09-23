@@ -123,6 +123,7 @@ const SimpleGemList = styled.div`
   }
   & span {
     font-size: 12px;
+    font-weight: bold;
   }
 `;
 

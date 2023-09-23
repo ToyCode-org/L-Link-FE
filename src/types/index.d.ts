@@ -172,7 +172,7 @@ export type ColosseumInfo = {
 
 export type CharacterArmories = {
   ArmoryAvatars: ArmoryAvatar[]; // ****
-  ArmoryCard: ArmoryCard[]; // ****
+  ArmoryCard: ArmoryCard; // ****
   ArmoryEngraving: ArmoryEngraving; // ****
   ArmoryEquipment: ArmoryEquipment; // ****
   ArmoryGem: ArmoryGem; // ****

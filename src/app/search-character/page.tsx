@@ -12,6 +12,7 @@ import { Collections } from "@/components/search-character/collections";
 import { AllCharacters } from "@/components/search-character/AllCharacters";
 import { useIndexHandler } from "@/hooks/useIndexHandler";
 import { GemSlot } from "@/components/search-character/basicInfo/gemSlot";
+import { CardSlot } from "@/components/search-character/basicInfo/cardSlot";
 
 type getUserInfo = {
   characters: Characters;
@@ -87,6 +88,7 @@ export default function SearchCharacter() {
                 <>
                   <BasicInfo characterArmories={characterArmories} />
                   <GemSlot gemList={characterArmories.ArmoryGem} />
+                  <CardSlot cardList={characterArmories.ArmoryCard} />
                 </>
               ) : null}
               {indexNumber === 1 ? <Skills /> : null}
