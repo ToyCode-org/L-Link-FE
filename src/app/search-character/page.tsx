@@ -56,6 +56,9 @@ export default function SearchCharacter() {
 
   const detailInfoNav = ["기본정보", "스킬", "수집", "보유 캐릭터"];
   const { indexNumber, indexHandler } = useIndexHandler();
+  const initIndexNumber = () => {
+    indexHandler(0);
+  };
 
   return (
     <ContentWrap>
@@ -94,7 +97,10 @@ export default function SearchCharacter() {
               {indexNumber === 1 ? <Skills /> : null}
               {indexNumber === 2 ? <Collections /> : null}
               {indexNumber === 3 ? (
-                <AllCharacters characters={characters} />
+                <AllCharacters
+                  characters={characters}
+                  initIndexNumber={initIndexNumber}
+                />
               ) : null}
             </DetailInfo>
           </InterfaceBox>

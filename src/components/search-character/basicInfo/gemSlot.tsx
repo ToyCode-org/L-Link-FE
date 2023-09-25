@@ -27,7 +27,9 @@ export const GemSlot = ({ gemList }: Props) => {
     setHoverGemIndex(-1);
   };
 
-  if (!gemList) return;
+  if (!gemList) {
+    return <ComponentLabel>장착보석 0</ComponentLabel>;
+  }
 
   const { Effects, Gems } = gemList;
 

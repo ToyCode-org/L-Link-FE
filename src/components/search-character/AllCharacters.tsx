@@ -8,9 +8,10 @@ import Link from "next/link";
 
 interface Props {
   characters: Character[];
+  initIndexNumber: () => void;
 }
 
-export const AllCharacters = ({ characters }: Props) => {
+export const AllCharacters = ({ characters, initIndexNumber }: Props) => {
   type CharactersInfo = {
     [key: string]: Character[];
   };
@@ -49,6 +50,7 @@ export const AllCharacters = ({ characters }: Props) => {
                   <CharacterCard
                     key={index}
                     style={commonStyles.innerContent}
+                    onClick={initIndexNumber}
                     href={`search-character?character-name=${CharacterName}`}
                   >
                     <CardInnerFlex>

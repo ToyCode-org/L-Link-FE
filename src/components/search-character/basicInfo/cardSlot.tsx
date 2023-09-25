@@ -9,7 +9,9 @@ interface Props {
   cardList: ArmoryCard;
 }
 export const CardSlot = ({ cardList }: Props) => {
-  if (!cardList) return;
+  if (!cardList) {
+    return <ComponentLabel>장착카드 0</ComponentLabel>;
+  }
 
   const { Cards, Effects } = cardList;
   return (
