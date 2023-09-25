@@ -145,9 +145,9 @@ export const AccessorySlot = ({ equipmentInfo }: AccessoryInfo) => {
   };
 
   const getEngraving = (contentStr: IndentStringGroup) => {
-    const egvFirst = contentStr.Element_000.contentStr;
-    const egvSecond = contentStr.Element_001.contentStr;
-    const egvThird = contentStr.Element_002.contentStr;
+    const egvFirst = contentStr?.Element_000.contentStr;
+    const egvSecond = contentStr?.Element_001.contentStr;
+    const egvThird = contentStr?.Element_002.contentStr;
 
     let text = `${egvFirst}${egvSecond}${egvThird}`;
     let parser = new DOMParser();
@@ -204,7 +204,7 @@ export const AccessorySlot = ({ equipmentInfo }: AccessoryInfo) => {
       break;
     }
     default: {
-      stat = tooltips.Element_005.value.Element_001.split("<BR>");
+      stat = tooltips.Element_005.value.Element_001?.split("<BR>");
       const engravingState = tooltips.Element_006.value.Element_000.contentStr;
       engravingData = getEngraving(engravingState);
       break;
@@ -238,7 +238,7 @@ export const AccessorySlot = ({ equipmentInfo }: AccessoryInfo) => {
           {gradeName[grade]}
         </ItemName>
         <Stats>
-          {stat.map((statValue, index) => {
+          {stat?.map((statValue, index) => {
             return <li key={index}>{statValue}</li>;
           })}
         </Stats>

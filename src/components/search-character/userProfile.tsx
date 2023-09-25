@@ -33,7 +33,7 @@ export const UserProfile = ({ characterArmories }: Props) => {
     ["아이템", ItemAvgLevel],
     ["원정대", ExpeditionLevel],
     ["PVP", PvpGradeName || " - "],
-    ["영지", `Lv.${TownLevel}${TownName}`],
+    ["영지", TownLevel ? `Lv.${TownLevel}${TownName}` : "-미개설-"],
   ];
 
   const collectibleItems = characterArmories.Collectibles;

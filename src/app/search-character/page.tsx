@@ -59,7 +59,7 @@ export default function SearchCharacter() {
 
   return (
     <ContentWrap>
-      {characterArmories === null ? (
+      {!characterArmories ? (
         <div
           style={{ textAlign: "center", fontWeight: "bold", fontSize: "20px" }}
         >

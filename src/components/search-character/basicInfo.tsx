@@ -61,6 +61,11 @@ export const BasicInfo = ({ characterArmories }: Props) => {
     EQUIPMENTS[12],
   ];
 
+  const effectLevels = ArmoryEngraving?.Effects.map(value => {
+    const { Name } = value;
+    return Name.split(" Lv. ");
+  });
+
   return (
     <Container>
       <ComponentLabel>장비</ComponentLabel>
@@ -84,6 +89,22 @@ export const BasicInfo = ({ characterArmories }: Props) => {
             })}
           </Accessory>
         </Equipments>
+        <EngravingEffect>
+          <ComponentLabel>
+            각인<span>{` (${effectLevels?.map(v => v[1]) || "0"})`}</span>
+          </ComponentLabel>
+          {effectLevels?.map((value, index) => {
+            const [name, level] = value;
+            return (
+              <li
+                key={index}
+                style={
+                  level === "3" ? { color: "orange" } : { color: "skyblue" }
+                }
+              >{`${name}(${level})`}</li>
+            );
+          })}
+        </EngravingEffect>
       </Content>
     </Container>
   );
@@ -102,4 +123,18 @@ const EquipmentList = styled.div`
 `;
 const Accessory = styled.div`
   width: 340px;
+`;
+
+const EngravingEffect = styled.div`
+  & p {
+    font-weight: bold;
+
+    & span {
+      font-size: 14px;
+      color: orange;
+    }
+  }
+  & li {
+    font-weight: bold;
+  }
 `;
