@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Image from "next/image";
+import { useState } from "react";
 import {
   gradeBackground,
   gradeNumber,
@@ -16,6 +17,15 @@ interface Props {
 }
 
 export const GemSlot = ({ gemList }: Props) => {
+  const [hoverGemIndex, setHoverGemIndex] = useState(-1);
+
+  const getGemIndex = (index: number) => {
+    setHoverGemIndex(index);
+  };
+  const initGemIndex = () => {
+    setHoverGemIndex(-1);
+  };
+
   if (!gemList) return;
 
   const { Effects, Gems } = gemList;
@@ -65,7 +75,11 @@ export const GemSlot = ({ gemList }: Props) => {
           const gemClass = gemName[1][0] + gemName[1][1];
 
           return (
-            <li key={index}>
+            <li
+              key={index}
+              onMouseEnter={() => getGemIndex(index)}
+              onMouseLeave={initGemIndex}
+            >
               <Image
                 src={Icon}
                 width={50}
@@ -74,13 +88,22 @@ export const GemSlot = ({ gemList }: Props) => {
                 style={{ background: `${gradeBackground[gradeLevel]}` }}
               />
               <span>{`${Level} ${gemClass}`}</span>
-              <GemHoverInfo>
-                <p></p>
-              </GemHoverInfo>
             </li>
           );
         })}
       </SimpleGemList>
+      <GemHoverInfo style={hoverGemIndex === -1 ? { display: "none" } : {}}>
+        <Image
+          src={Effects[hoverGemIndex]?.Icon}
+          width={50}
+          height={50}
+          alt="스킬"
+        />
+        <div>
+          <p>{Effects[hoverGemIndex]?.Name}</p>
+          <span>{Effects[hoverGemIndex]?.Description}</span>
+        </div>
+      </GemHoverInfo>
       <ComponentLabel>보석 상세</ComponentLabel>
       <GemInfoList>
         {Effects.map((value, index) => {
@@ -154,4 +177,25 @@ const GemInfo = styled.div`
   }
 `;
 
-const GemHoverInfo = styled.div``;
+const GemHoverInfo = styled.div`
+  padding: 20px;
+
+  display: flex;
+  position: absolute;
+  transform: translateY(15px);
+
+  width: 620px;
+  border: 1px solid #7b7b7b;
+  border-radius: 10px;
+  background-color: #15181d;
+
+  & img {
+    margin-right: 10px;
+  }
+
+  & p {
+    margin: 0;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+`;
