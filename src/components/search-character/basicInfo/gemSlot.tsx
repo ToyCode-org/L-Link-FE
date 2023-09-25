@@ -9,6 +9,7 @@ import {
 } from "../itemInfo";
 import { ComponentLabel } from "@/components/common/components";
 import { DOMparsedData } from "@/util/DOMparser";
+import { getPublicImage } from "@/util/getPubliceImage";
 
 import { ArmoryGem } from "@/types";
 
@@ -94,7 +95,7 @@ export const GemSlot = ({ gemList }: Props) => {
       </SimpleGemList>
       <GemHoverInfo style={hoverGemIndex === -1 ? { display: "none" } : {}}>
         <Image
-          src={Effects[hoverGemIndex]?.Icon}
+          src={Effects[hoverGemIndex]?.Icon || getPublicImage("logo")}
           width={50}
           height={50}
           alt="스킬"
