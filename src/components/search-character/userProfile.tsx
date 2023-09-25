@@ -21,6 +21,8 @@ export const UserProfile = ({ characterArmories }: Props) => {
     TownLevel,
     TownName,
     CharacterImage,
+    Stats,
+    Tendencies,
   } = characterArmories.ArmoryProfile;
   const profileInfo = [
     ["서버", ServerName],
@@ -58,7 +60,7 @@ export const UserProfile = ({ characterArmories }: Props) => {
         />
       </UserData>
       <UserCollections style={commonStyles.container}>
-        <p>수집형 포인트</p>
+        <InfoName>수집형 포인트</InfoName>
         <CollectionList>
           {collectibleItems.map((collection, index) => {
             const { Point, Type } = collection;
@@ -76,6 +78,22 @@ export const UserProfile = ({ characterArmories }: Props) => {
           })}
         </CollectionList>
       </UserCollections>
+      <UserStats style={commonStyles.container}>
+        <InfoName>스탯 / 성향</InfoName>
+        <StatList>
+          {Stats.map((stat, index) => {
+            const { Type, Value } = stat;
+            return <li key={index}>{`${Type}: ${Value}`}</li>;
+          })}
+        </StatList>
+        <StatHr />
+        <StatList>
+          {Tendencies.map((Tendencie, index) => {
+            const { Type, Point } = Tendencie;
+            return <li key={index}>{`${Type}: ${Point}`}</li>;
+          })}
+        </StatList>
+      </UserStats>
     </UserProfileWrap>
   );
 };
@@ -116,16 +134,16 @@ const CharacterInfo = styled.ul`
 `;
 
 const UserCollections = styled.div`
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
-
-  & p {
-    margin: 0;
-    padding: 5px;
-    background-color: #15181d;
-    border-radius: 10px 10px 0 0;
-    text-align: center;
-  }
+`;
+const InfoName = styled.p`
+  margin: 0;
+  padding: 5px;
+  background-color: #15181d;
+  border-radius: 10px 10px 0 0;
+  text-align: center;
 `;
 
 const CollectionList = styled.div`
@@ -143,4 +161,16 @@ const CollectionList = styled.div`
       border-radius: 5px;
     }
   }
+`;
+
+const UserStats = styled.div`
+  margin-bottom: 20px;
+`;
+
+const StatList = styled.div`
+  padding: 15px;
+`;
+
+const StatHr = styled.hr`
+  width: 80%;
 `;
