@@ -3,7 +3,6 @@ import React from "react";
 import { Inter } from "next/font/google";
 import styled from "styled-components";
 import { Header } from "@/components/layout/header";
-import { MetaData } from "@/components/layout/metadata";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,7 +13,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <MetaData />
       <LayoutBody className={inter.className}>
         <Header />
         <Content>{children}</Content>
