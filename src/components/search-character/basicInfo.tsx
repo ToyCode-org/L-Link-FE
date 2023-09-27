@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Image from "next/image";
 import { CharacterArmories, Equipment } from "@/types";
 import {
   BlankEquipment,
@@ -62,8 +63,13 @@ export const BasicInfo = ({ characterArmories }: Props) => {
   ];
 
   const effectLevels = ArmoryEngraving?.Effects.map(value => {
-    const { Name } = value;
-    return Name.split(" Lv. ");
+    const { Name, Icon } = value;
+    const [name, level] = Name.split(" Lv. ");
+    return {
+      name,
+      level,
+      icon: Icon,
+    };
   });
 
   return (
@@ -91,19 +97,25 @@ export const BasicInfo = ({ characterArmories }: Props) => {
         </Equipments>
         <EngravingEffect>
           <ComponentLabel>
-            각인<span>{` (${effectLevels?.map(v => v[1]) || "0"})`}</span>
+            각인<span>{` (${effectLevels?.map(v => v.level) || "0"})`}</span>
           </ComponentLabel>
-          {effectLevels?.map((value, index) => {
-            const [name, level] = value;
-            return (
-              <li
-                key={index}
-                style={
-                  level === "3" ? { color: "orange" } : { color: "skyblue" }
-                }
-              >{`${name}(${level})`}</li>
-            );
-          })}
+          <EffectsWrap>
+            {effectLevels?.map((value, index) => {
+              const { name, level, icon } = value;
+
+              return (
+                <EngravingEffectList
+                  key={index}
+                  style={
+                    level === "3" ? { color: "orange" } : { color: "skyblue" }
+                  }
+                >
+                  <Image src={icon} width={50} height={50} alt="effects" />
+                  <span>{`${name}(${level})`}</span>
+                </EngravingEffectList>
+              );
+            })}
+          </EffectsWrap>
         </EngravingEffect>
       </Content>
     </Container>
@@ -136,5 +148,23 @@ const EngravingEffect = styled.div`
   }
   & li {
     font-weight: bold;
+  }
+`;
+
+const EffectsWrap = styled.div`
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 110px 110px 110px 110px 110px 110px;
+`;
+const EngravingEffectList = styled.li`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  & img {
+    border-radius: 25px;
+  }
+  & span {
+    font-size: 12px;
   }
 `;

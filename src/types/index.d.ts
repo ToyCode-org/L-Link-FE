@@ -42,6 +42,7 @@ export type ArmoryCard = {
 export type EngravingEffects = {
   Name: string;
   Description: string;
+  Icon: string;
 };
 export type Engraving = {
   Icon: string;
