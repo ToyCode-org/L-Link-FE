@@ -48,13 +48,13 @@ export const CardSlot = ({ cardList }: Props) => {
         })}
       </CardBox>
       <div>
-        <p>효과</p>
+        <ComponentLabel>효과</ComponentLabel>
         {Effects.map((value1, idx1) =>
           value1.Items.map((value2, idx2) => {
             const { Name, Description } = value2;
             return (
               <EffectInfo key={`${idx1}${idx2}`}>
-                {Name} : <span>{Description}</span>
+                <span>{Name}</span> : <span>{Description}</span>
               </EffectInfo>
             );
           }),
@@ -95,8 +95,11 @@ const CardName = styled.div`
 
 const EffectInfo = styled.li`
   font-size: 14px;
-  font-weight: bold;
 
+  & span:first-child {
+    color: orange;
+    font-weight: bold;
+  }
   & span {
     font-size: 14px;
     font-weight: normal;

@@ -1,9 +1,10 @@
 import styled from "styled-components";
+import { ComponentLabel } from "../common/components";
 
 export const Skills = () => {
   return (
     <Container>
-      <p>skills</p>
+      <ComponentLabel>스킬</ComponentLabel>
     </Container>
   );
 };

@@ -95,7 +95,9 @@ export default function SearchCharacter() {
                 </>
               ) : null}
               {indexNumber === 1 ? <Skills /> : null}
-              {indexNumber === 2 ? <Collections /> : null}
+              {indexNumber === 2 ? (
+                <Collections collectibles={characterArmories.Collectibles} />
+              ) : null}
               {indexNumber === 3 ? (
                 <AllCharacters
                   characters={characters}
