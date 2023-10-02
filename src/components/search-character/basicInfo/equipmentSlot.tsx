@@ -8,7 +8,7 @@ import {
   gradeName,
 } from "../itemInfo";
 import { qualityCheck } from "../itemInfo";
-
+import { DOMparsedData } from "@/util/DOMparser";
 // types
 import { Equipment, ArmoryEngraving } from "@/types";
 import { ToolTip, EngravingData, IndentStringGroup, ElementType } from "..";
@@ -150,11 +150,10 @@ export const AccessorySlot = ({ equipmentInfo }: AccessoryInfo) => {
     const egvThird = contentStr?.Element_002.contentStr;
 
     let text = `${egvFirst}${egvSecond}${egvThird}`;
-    let parser = new DOMParser();
-    let doc = parser.parseFromString(text, "text/html");
+    let doc = DOMparsedData(text);
     // replaceAll은 호출될 때마다 regex를 컴파일하기 때문에
     // 성능에 부정적 영향을 줄 수 있음. 다른 parsing 방법 필요
-    let result: string | string[] = doc.body.innerText
+    let result: string | string[] = doc.innerText
       .split(" ")
       .join("")
       .replaceAll("]", " ");
@@ -171,15 +170,6 @@ export const AccessorySlot = ({ equipmentInfo }: AccessoryInfo) => {
     return engravingLevel;
   };
 
-  // ## 1
-  // const getBraceletEffects = (effectInfo: string) => {
-  //   let parser = new DOMParser();
-  //   let doc = parser.parseFromString(effectInfo, "text/html");
-  //   let result = doc.body.innerText;
-  //   // TODO: data parsing
-  //   return result;
-  // };
-
   const indentStringGroupKey = getElementTypeNameStringGroup(
     tooltips,
     "IndentStringGroup",
@@ -193,7 +183,8 @@ export const AccessorySlot = ({ equipmentInfo }: AccessoryInfo) => {
       //   "ItemPartBox",
       // ) as string;
       // const statState = tooltips[itemPartBox].value.Element_001;
-      // const parsingStats = getBraceletEffects(statState);
+      // console.log(DOMparsedData(statState).innerHTML.split("<br>"));
+      // console.log(JSON.parse(equipmentInfo.Tooltip));
       break;
     }
     case "스톤": {
@@ -205,7 +196,7 @@ export const AccessorySlot = ({ equipmentInfo }: AccessoryInfo) => {
     }
     default: {
       stat = tooltips.Element_005.value.Element_001?.split("<BR>");
-      const engravingState = tooltips.Element_006.value.Element_000.contentStr;
+      const engravingState = tooltips.Element_006.value.Element_000?.contentStr;
       engravingData = getEngraving(engravingState);
       break;
     }
